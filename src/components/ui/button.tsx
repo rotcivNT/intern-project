@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-[#216CE3] rounded-[8px] text-white font-[600] hover:opacity-90 transition-all duration-200",
-        secondary: "bg-transparent text-[#216CE3] font-[600]",
+        secondary: "bg-transparent text-[#216CE3] font-[600] hover:opacity-90",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
