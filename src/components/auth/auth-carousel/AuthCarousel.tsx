@@ -64,14 +64,14 @@ export default function AuthCarousel() {
           <CarouselItem key={index}>
             <div
               className={`${
-                index === 0 ? "pb-0" : "pb-[250px]"
+                index === 0 ? "pb-0" : "pb-[260px]"
               } relative flex justify-center pt-[60px] mx-auto h-full max-h-full`}
             >
               <div className="px-6 flex justify-center items-center w-full text-center">
                 <img src={item.imagePath} className="max-h-full inline-block" />
               </div>
-              <p className=" max-w-[520px] flex flex-col w-full items-center gap-4 absolute bottom-[120px] left-1/2 -translate-x-1/2 text-[#f6f9fe]">
-                <span className="text-[40px] font-[500] leading-[46px]">
+              <p className=" max-w-[520px] flex flex-col w-full items-center gap-4 absolute bottom-[100px] left-1/2 -translate-x-1/2 text-[#f6f9fe]">
+                <span className="text-[40px] font-[500] leading-[46px] text-center">
                   {carousels[index].title}
                 </span>
                 <span className="text-lg leading-[21px]">
