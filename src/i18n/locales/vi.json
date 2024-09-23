@@ -1,0 +1,38 @@
+{
+    "auth": {
+      "login": {
+        "title": "Đăng Nhập",
+        "email": {
+          "label": "Email",
+          "placeholder": "Email của bạn",
+          "errEmptyMessage": "Trường này là bắt buộc",
+          "errInvalidMessage": "Email không hợp lệ!"
+        },
+        "password": {
+          "label": "Mật khẩu",
+          "placeholder": "Mật khẩu của bạn",
+          "errEmptyMessage": "Trường này là bắt buộc",
+          "errInvalidMessage": "Mật khẩu không hợp lệ!"
+        },
+        "rememberMe": "Ghi nhớ đăng nhập",
+        "forgotPassword": "Quên mật khẩu",
+        "loginButton": "Đăng Nhập",
+        "noAccount": "Chưa có tài khoản?",
+        "signUp": "Đăng Ký"
+      },
+      "carousels": [
+      {
+        "title": "Quản Lý Bảng Điều Khiển",
+        "description": "Bảng điều khiển linh động, dễ dàng tùy chỉnh theo nhu cầu của dự án."
+      },
+      {
+        "title": "Quản Lý Dữ Liệu",
+        "description": "Lưu trữ phân tích dữ liệu, cài đặt cảnh báo, dự báo bảo trì."
+      },
+      {
+        "title": "Quản Lý Thiết Bị",
+        "description": "Quản Lý nhiều thiết bị trên 1 nền tảng, hỗ trợ đa dạng kết nối."
+      }
+    ]
+  }
+}

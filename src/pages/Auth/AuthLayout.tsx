@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import AuthCarousel from "../components/auth/auth-carousel/AuthCarousel";
+import AuthCarousel from "../../components/auth/auth-carousel/AuthCarousel";
 
 export default function AuthLayout() {
   const isAuthenticated = false;

@@ -1,0 +1,38 @@
+{
+    "auth": {
+      "login": {
+        "title": "Log In",
+        "email": {
+          "label": "Email",
+          "placeholder": "Your email",
+          "errEmptyMessage": "This field is required",
+          "errInvalidMessage": "The input is not valid email!"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Your password",
+          "errEmptyMessage": "This field is required",
+          "errInvalidMessage": "The input is not valid password!"
+        },
+        "rememberMe": "Remember Me",
+        "forgotPassword": "Forgot Password",
+        "loginButton": "Log In",
+        "noAccount": "Don't Have An Account Yet?",
+        "signUp": "Sign Up"
+      },
+      "carousels": [
+      {
+        "title": "Dashboard Applications",
+        "description": "Create your own custom dashboard for device management and data visualization."
+      },
+      {
+        "title": "Data Management and Analytics",
+        "description": "Enables data collection and data streaming from any IoT-connected device."
+      },
+      {
+        "title": "Device Management",
+        "description": "Manage devices with complex data models."
+      }
+    ]
+  }
+}
