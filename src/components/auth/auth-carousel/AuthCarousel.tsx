@@ -67,11 +67,7 @@ export default function AuthCarousel() {
                 index === 0 ? "pb-0" : "pb-[250px]"
               } relative flex justify-center pt-[60px] mx-auto h-full max-h-full`}
             >
-              <div
-                className={`px-6 mx-auto w-full text-center ${
-                  index === 1 && "relative xl:top-[60px]"
-                }`}
-              >
+              <div className="px-6 flex justify-center items-center w-full text-center">
                 <img src={item.imagePath} className="max-h-full inline-block" />
               </div>
               <p className=" max-w-[520px] flex flex-col w-full items-center gap-4 absolute bottom-[120px] left-1/2 -translate-x-1/2 text-[#f6f9fe]">
