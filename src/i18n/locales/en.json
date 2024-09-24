@@ -18,7 +18,8 @@
         "forgotPassword": "Forgot Password",
         "loginButton": "Log In",
         "noAccount": "Don't Have An Account Yet?",
-        "signUp": "Sign Up"
+        "signUp": "Sign Up",
+        "loginFailMessage": "Login failed, please check your login information!"
       },
       "carousels": [
       {

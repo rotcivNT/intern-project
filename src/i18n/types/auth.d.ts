@@ -18,6 +18,7 @@ export interface AuthTranslation {
     loginButton: string;
     noAccount: string;
     signUp: string;
+    loginFailMessage: string;
   };
   carousels: {
     title: string;

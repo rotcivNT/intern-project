@@ -8,19 +8,20 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useLoginMutation } from "@/features/auth/api";
 import { EmailIcon } from "@/icons/EmailIcon";
 import { LockIcon } from "@/icons/LockIcon";
 import { cn } from "@/lib/utils";
-import { useLoginMutation } from "@/features/auth/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import CryptoJS from "crypto-js";
+import Cookies from "js-cookie";
+import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { z } from "zod";
-import CryptoJS from "crypto-js";
-import Cookies from "js-cookie";
 
 const SECRET_KEY = "MY_SCRET_KEY";
 
@@ -59,6 +60,7 @@ const langs = [
 export default function SignIn() {
   const { t, i18n } = useTranslation("auth");
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(!!Cookies.get("email"));
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -76,11 +78,13 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     try {
       await login({
         username: values.email,
         password: values.password,
-      });
+      }).unwrap();
+
       if (isRememberMe) {
         const encodePassword = encode(values.password);
         Cookies.set("email", values.email);
@@ -90,8 +94,9 @@ export default function SignIn() {
         Cookies.remove("password");
       }
       navigate("/dashboard");
-    } catch (e) {
-      console.log(e);
+    } catch {
+      setIsLoading(false);
+      toast.error(t("login.loginFailMessage"));
     }
   };
 
@@ -200,7 +205,11 @@ export default function SignIn() {
               </Button>
             </div>
             <Button type="submit" variant="default" className="w-full h-10">
-              {t("login.loginButton")}
+              {isLoading ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                t("login.loginButton")
+              )}
             </Button>
           </form>
 

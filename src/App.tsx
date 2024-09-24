@@ -4,6 +4,7 @@ import AuthLayout from "./pages/Auth/AuthLayout";
 import HomePage from "./pages/Home/HomePage";
 import RequireAuth from "./components/RequireAuth";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
       </Routes>
+      <Toaster position="top-right" />
     </main>
   );
 }

@@ -18,7 +18,8 @@
         "forgotPassword": "Quên mật khẩu",
         "loginButton": "Đăng Nhập",
         "noAccount": "Chưa có tài khoản?",
-        "signUp": "Đăng Ký"
+        "signUp": "Đăng Ký",
+        "loginFailMessage": "Đăng nhập thất bại, vui lòng kiểm tra lại thông tin đăng nhập!"
       },
       "carousels": [
       {
