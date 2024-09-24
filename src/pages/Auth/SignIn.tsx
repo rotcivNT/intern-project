@@ -11,12 +11,27 @@ import { Input } from "@/components/ui/input";
 import { EmailIcon } from "@/icons/EmailIcon";
 import { LockIcon } from "@/icons/LockIcon";
 import { cn } from "@/lib/utils";
+import { useLoginMutation } from "@/features/auth/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import CryptoJS from "crypto-js";
+import Cookies from "js-cookie";
+
+const SECRET_KEY = "MY_SCRET_KEY";
+
+const encode = (data: string): string => {
+  return CryptoJS.AES.encrypt(data, SECRET_KEY).toString();
+};
+
+const decode = (cipherText: string): string => {
+  const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
+  return bytes.toString(CryptoJS.enc.Utf8);
+};
 
 enum LANGUAGES {
   VIE = "VIE",
@@ -44,18 +59,40 @@ const langs = [
 export default function SignIn() {
   const { t, i18n } = useTranslation("auth");
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [isRememberMe, setIsRememberMe] = useState(!!Cookies.get("email"));
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: Cookies.get("email") || "",
+      password: Cookies.get("password")
+        ? decode(Cookies.get("password") as string)
+        : "",
     },
     mode: "onTouched",
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const [login] = useLoginMutation();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await login({
+        username: values.email,
+        password: values.password,
+      });
+      if (isRememberMe) {
+        const encodePassword = encode(values.password);
+        Cookies.set("email", values.email);
+        Cookies.set("password", encodePassword);
+      } else if (Cookies.get("email") || Cookies.get("password")) {
+        Cookies.remove("email");
+        Cookies.remove("password");
+      }
+      navigate("/dashboard");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -116,7 +153,9 @@ export default function SignIn() {
                     <FormControl>
                       <Input
                         {...field}
-                        className="w-[100%] text-[#DDD] placeholder:text-[#DDD] rounded-[8px] border border-[#455E87] pl-12 tracking-[8px] placeholder:tracking-normal"
+                        className={`${
+                          showPassword ? "" : "tracking-[8px]"
+                        } w-[100%] text-[#DDD] placeholder:text-[#DDD] rounded-[8px] border border-[#455E87] pl-12 placeholder:tracking-normal`}
                         placeholder={t("login.password.placeholder")}
                         type={showPassword ? "text" : "password"}
                         id="password"
@@ -146,7 +185,12 @@ export default function SignIn() {
 
             <div className="flex justify-between items-center !mb-2">
               <div className="flex items-center gap-2">
-                <Checkbox id="remember-me" className="size-6" />
+                <Checkbox
+                  id="remember-me"
+                  className="size-6"
+                  checked={isRememberMe}
+                  onCheckedChange={(e) => setIsRememberMe(!!e.valueOf())}
+                />
                 <label htmlFor="remember-me" className="text-[#efefef]">
                   {t("login.rememberMe")}
                 </label>

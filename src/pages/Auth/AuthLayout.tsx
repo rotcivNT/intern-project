@@ -1,13 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
 import AuthCarousel from "../../components/auth/auth-carousel/AuthCarousel";
+import Cookies from "js-cookie";
 
 export default function AuthLayout() {
-  const isAuthenticated = false;
-  if (isAuthenticated) {
+  const token = Cookies.get("token");
+  if (token) {
     return <Navigate to="/dashboard" />;
   }
   return (
-    <div className="flex bg-[#1c2636] h-screen">
+    <div className="flex bg-[#1c2636] h-screen overflow-auto">
       <div className="basis-full lg:basis-5/12 flex justify-center items-center mx-auto">
         <Outlet />
       </div>
